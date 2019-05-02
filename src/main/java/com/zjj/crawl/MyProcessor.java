@@ -12,6 +12,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
  */
 public class MyProcessor implements PageProcessor {
 
+    @Override
     public void process(Page page) {
         //page.addTargetRequests(page.getHtml().links().all());
         page.addTargetRequests(page.getHtml().links().regex("https://blog.csdn.net/[a-z 0-9 -]+/article/details/[0-9]{8}").all());
@@ -21,7 +22,7 @@ public class MyProcessor implements PageProcessor {
         page.putField("content", page.getHtml().xpath("//*[@id=\"mainBox\"]/main/div[1]"));
 
     }
-
+    @Override
     public Site getSite() {
         return Site.me().setSleepTime(100).setRetryTimes(3);
     }
