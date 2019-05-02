@@ -29,6 +29,7 @@ public class MyProcessor implements PageProcessor {
     public static void main(String[] args) {
         Spider.create(new MyProcessor()).addUrl("https://blog.csdn.net/").addPipeline(new ConsolePipeline()).addPipeline(new FilePipeline("D:/crawldata")).run();
     }
+
 }
 
 
