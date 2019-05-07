@@ -1,5 +1,7 @@
 package com.zjj.crawl;
 
+import com.zjj.model.Article;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -10,7 +12,11 @@ import us.codecraft.webmagic.processor.PageProcessor;
 /**
  * 2019年3月9日22:14:19
  */
+@Component
 public class MyProcessor implements PageProcessor {
+
+
+    public Article article = new Article();
 
     @Override
     public void process(Page page) {
@@ -20,6 +26,11 @@ public class MyProcessor implements PageProcessor {
         page.putField("title", page.getHtml().xpath("//*[@id=\"mainBox\"]/main/div[1]/div/div/div[1]/h1"));
         //page.putField("content", page.getHtml().xpath("//*[@id=\"article_content\"]"));
         page.putField("content", page.getHtml().xpath("//*[@id=\"mainBox\"]/main/div[1]"));
+        if (page.getResultItems() != null) {
+            article.setContent(page.getResultItems().get("content").toString());
+            article.setTitle(page.getResultItems().get("title").toString());
+        }
+
 
     }
     @Override
@@ -29,6 +40,7 @@ public class MyProcessor implements PageProcessor {
 
     public static void main(String[] args) {
         Spider.create(new MyProcessor()).addUrl("https://blog.csdn.net/").addPipeline(new ConsolePipeline()).addPipeline(new FilePipeline("D:/crawldata")).run();
+
     }
 }
 
