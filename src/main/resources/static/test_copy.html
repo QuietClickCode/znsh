@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <title>Title</title>
+    <style>
+        .table tr {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="vueRoot">
+    <table class="table">
+
+        <thead @click="haha">
+        <tr v-for="i in Math.ceil(title.length/length)" @click="select(i)" v-show="BB?(i==1):(i != 0)">
+            <th v-for="(item,index) in (arrd.slice(i*length-length,length*i))">{{title[item]}}</th>
+        </tr>
+        </thead>
+        <tbody v-for="(items,index) in arr" @click="select(items,index)"  >
+        <!--<tr  v-for="i in Math.ceil(title.length/length)"  v-show="((ppx==1)?( i == 1):(i!=0 ))&&i==3">-->
+        <tr  v-for="i in Math.ceil(title.length/length)"  v-show="i==1||index==ppx">
+            <td v-for="(item,index) in (arrd.slice(i*length-length,length*i))">{{items[titleId[item]]}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="js/vue.min.js"></script>
+<script>
+    var vue = new Vue({
+        el: "#vueRoot",
+        data: {
+            BBState:true,
+            BB:true,
+            state:true,
+            ppx:'null',
+            Current: 'x',
+            arrd: [0, 1, 2, 3, 4, 5, 6, 7],
+            title: ["序号", "名称", "状态", "类型", "销售价", "采购价", "重量", "颜色"],
+            length: 8,
+            title2: ["销售价", "采购价", "重量", "颜色"],
+            titleId: ["ProductId", "ProductName", "State", "TypeName", "Sale", "Purchase", "Weight", "Color"],
+            title2Id: ["Sale", "Purchase", "Weight", "Color"],
+            CurrentItem: '',
+            isShow: false,
+            isShowBody: false,
+            arr: [{
+                ProductId: 1, ProductName: 'lyy', State: '启用',
+
+                TypeName: 'I类', Sale: '56.00', Purchase: '40.00',
+                Weight: '20kg', Color: "黄色"
+            }, {
+                ProductId: 2, ProductName: 'xxg', State: '未启用',
+
+                TypeName: 'II类', Sale: '34.00', Purchase: '54.00',
+                Weight: '90kg', Color: "绿色"
+            }, {
+                ProductId: 3, ProductName: '3xxg', State: '3未启用',
+
+                TypeName: '3II类', Sale: '334.00', Purchase: '354.00',
+                Weight: '390kg', Color: "3绿色"
+            }]
+        },
+        methods: {
+            select: function (items,index) {
+                if(this.state == true) {
+                    this.Current = items
+                    this.ppx = index;
+                    this.state = false;
+                }else{
+                    this.Current = items
+                    this.ppx = 'null';
+                   this.state = true;
+                }
+
+            },
+            selectItem: function (item) {
+                alert(item);
+                this.isShowBody = !this.isShowBody
+                this.CurrentItem = item;
+
+            },
+            showBody: function () {
+                this.isShowBody = !this.isShowBody;
+            },
+            haha: function () {
+                if(this.BBState == true) {
+                    this.BB = true
+                    this.BBState = false;
+                }else{
+                    this.BB = false
+                    this.BBState = true;
+                }
+            },
+            hehe: function () {
+                this.isBodyShow = !this.isBodyShow;
+            }
+
+        }
+    })
+</script>
+</html>

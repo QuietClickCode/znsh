@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+        user-scalable=no"/>
+    <link rel="stylesheet" href="/js/mytable.css">
+</head>
+<body>
+<div id="vueRoot">
+    <my-tablel>
+        <my-head>
+            <my-th :is-show-head=true>
+                <my-td>序号</my-td>
+                <!--       
+                                        <my-td>性别</my-td>-->
+            </my-th>
+            <my-th :is-show-head='isShowHead_'>
+                <my-td>性格</my-td>
+                <!--  <my-td>重量</my-td>
+                  <my-td>长度</my-td>-->
+            </my-th>
+
+        </my-head>
+
+        <my-body v-for="(item,index) in arr" @hahaha="hahaha(index)">
+            <my-tr v-show="true" :index="index">
+                <my-td>{{arr[index].Id}}</my-td>
+                <!--   <my-td>{{arr[index].name}}</my-td>
+                   <my-td>{{arr[index].sex}}</my-td>-->
+            </my-tr>
+            <my-tr v-show="index == Current">
+                <my-td>{{arr[index].nature}}</my-td>
+                <!--   <my-td>{{arr[index].weight}}</my-td>
+                   <my-td>{{arr[index].length}}</my-td>-->
+            </my-tr>
+        </my-body>
+    </my-tablel>
+
+
+    <my-tabler>
+        <my-head>
+            <my-th :is-show-head=true>
+                <!--    <my-td>序号</my-td>-->
+                <my-td>名称</my-td>
+                <my-td>性别</my-td>
+            </my-th>
+            <my-th :is-show-head='isShowHead_'>
+                <!--    <my-td>性格</my-td>-->
+                <my-td>重量</my-td>
+                <my-td>长度</my-td>
+            </my-th>
+
+        </my-head>
+        <my-body v-for="(item,index) in arr" @hahaha="hahaha(index)">
+            <my-tr v-show="true" :index="index">
+                <!--   <my-td>{{arr[index].Id}}</my-td>-->
+                <my-td>{{arr[index].name}}</my-td>
+                <my-td>{{arr[index].sex}}</my-td>
+            </my-tr>
+            <my-tr v-show="index == Current">
+                <!--<my-td>{{arr[index].nature}}</my-td>-->
+                <my-td>{{arr[index].weight}}</my-td>
+                <my-td>{{arr[index].length}}</my-td>
+            </my-tr>
+        </my-body>
+    </my-tabler>
+</div>
+
+<!--脚本-->
+<script src="/js/vue.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var store = {
+        isShowBody_: true,
+        Id: "123", IsShow: "",
+        isShowHead_: true,
+        isShow2: true, isShow: true,
+        Current: null, ii: 'xx', title: "我是",
+        arr: [{Id: '1', name: '莉莉安', nature: '开朗', sex: '女', weight: '45kg', length: "165cm"}, {
+            Id: '2',
+            name: '莉莉安',
+            nature: '忧郁',
+            sex: '女',
+            weight: '50kg',
+            length: "170cm"
+        }, {Id: '3', name: '莉莉安', nature: '开朗', sex: '女', weight: '45kg', length: "165cm"}, {
+            Id: '4',
+            name: '莉莉安',
+            nature: '忧郁',
+            sex: '女',
+            weight: '50kg',
+            length: "170cm"
+        }]
+
+    };
+
+
+    var tpl1l = '<div  id="left_div">';
+    tpl1l += '<table border="1">';
+    tpl1l += '<slot ></slot>';
+    tpl1l += '</table>';
+    tpl1l += '</div>';
+
+
+    var tpl1r = '<div id="right_div">';
+    tpl1r += '<div id="right_div2">';
+    tpl1r += '<div id="right_table2">';
+    tpl1r += '<table border="1">';
+    tpl1r += '<slot ></slot>';
+    tpl1r += '</table>';
+    tpl1r += '</div>';
+    tpl1r += '</div>';
+
+    var tpl2 =
+        '           <tr >' +
+        '            <slot></slot>' +
+        '           </tr>';
+    var tpl22 =
+        '           <tr v-show="isShowHead">' +
+        '            <slot></slot>' +
+        '           </tr>';
+
+    var tpl3 = ' <td :colspan="colspan_" :rowspan="rowspan_"> <slot></slot></td>';
+
+    var tpl4 = '<tr @click=" $emit(\'hahaha\')"><slot></slot></tr>';
+    var tpl5 = '<th @click="hehe"><slot></slot></th>';
+    var myBody = {
+            data: function () {
+                return {Name: 'hello'};
+            },
+            props: ["prop", "title", "isShow", "index"],
+            template: tpl4,
+            inject: ['grandParent'],
+            mounted: function () {
+                this.grandParent.propArr.push(this.prop);
+                this.grandParent.titleArr.push(this.title);
+            },
+            methods: {
+                haha: function (item) {
+                },
+
+            }
+        }
+    ;
+    var myHead = {
+            data: function () {
+                return {Name: 'hello'};
+            },
+            props: ["prop", "title", "isShow"],
+            template: tpl5,
+            inject: ['grandParent'],
+            mounted: function () {
+                this.grandParent.propArr.push(this.prop);
+                this.grandParent.titleArr.push(this.title);
+            },
+            methods: {
+                hehe: function () {
+                    if (store.isShowHead_ == true) {
+
+                        store.isShowHead_ = false;
+                    } else if (store.isShowHead_ == false) {
+                        store.isShowHead_ = true;
+
+                    }
+                },
+            }
+        }
+    ;
+    var myTablel = {
+        data: function () {
+            return {Name: 1112, propArr: [], titleArr: []};
+        },
+        props: ["text", 'isShow'],
+        template: tpl1l,
+        provide: function () {
+            return {grandParent: this};
+        },
+    };
+    var myTabler = {
+        data: function () {
+            return {Name: 1112, propArr: [], titleArr: []};
+        },
+        props: ["text", 'isShow'],
+        template: tpl1r,
+        provide: function () {
+            return {grandParent: this};
+        },
+    };
+
+    var myTr = {
+            data: function () {
+                return {Name: 'hello'};
+            },
+            props: ["prop", "title", "isShow", "isShowBody", "index"],
+            template: tpl2,
+            inject: ['grandParent'],
+            mounted: function () {
+                this.grandParent.propArr.push(this.prop);
+                this.grandParent.titleArr.push(this.title);
+            },
+            methods: {}
+        }
+    ;
+    var myTr2 = {
+            data: function () {
+                return {Name: 'hello'};
+            },
+            props: ["prop", "title", "isShow", "isShowHead"],
+            template: tpl22,
+            inject: ['grandParent'],
+            mounted: function () {
+                this.grandParent.propArr.push(this.prop);
+                this.grandParent.titleArr.push(this.title);
+            },
+            methods: {}
+        }
+    ;
+
+    var myTd = {
+        data: function () {
+            return {Name: 'hello', ii: '你好'};
+        },
+        props: ["prop", "title", "rowspan_", 'colspan_', "width", "style", "item", "ii"],
+        template: tpl3,
+        inject: ['grandParent'],
+        mounted: function () {
+            this.grandParent.propArr.push(this.prop);
+            this.grandParent.titleArr.push(this.title);
+        }
+    };
+
+    Vue.component('my-tabler', myTabler);
+    Vue.component('my-tablel', myTablel);
+    Vue.component('my-tr', myTr);
+    Vue.component('my-th', myTr2);
+    Vue.component('my-td', myTd);
+    Vue.component('my-body', myBody);
+    Vue.component('my-head', myHead);
+
+    new Vue({
+        el: "#vueRoot",
+        data: store,
+        methods: {
+            hahaha: function (index) {
+
+                if (store.Current == index) {
+                    store.Current = null;
+                } else {
+                    store.Current = index
+
+                }
+
+
+            }
+        }
+    });
+
+    //固定和滚动
+    var right_div2 = document.getElementById("right_div2");
+    right_div2.onscroll = function () {
+        var right_div2_top = this.scrollTop;
+        var right_div2_left = this.scrollLeft;
+        document.getElementById("left_div2").scrollTop = right_div2_top;
+        document.getElementById("right_div1").scrollLeft = right_div2_left;
+    }
+    //设置右边div宽度
+    document.getElementById("right_div").style.width = "" + document.documentElement.clientWidth - 130 + "px";
+    setInterval(function () {
+        document.getElementById("right_div").style.width = "" + document.documentElement.clientWidth - 130 + "px";
+    }, 0);
+
+
+</script>
+</body>
+</html>

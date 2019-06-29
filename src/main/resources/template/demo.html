@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+        user-scalable=no"/>
+    <link rel="stylesheet" href="/js/mytable.css">
+</head>
+<body>
+<div id="vueRoot" style="display: none;">
+    <my-table>
+        <my-body style="color:#909399;font-weight: bold;" @expand="expandhead">
+            <my-tr :is-show-head=true style="text-align:center">
+                <my-td>序号2</my-td>
+                <my-td></my-td>
+
+                <!--固定列为一列,使用rowspan必须用一个空单元格占位-->
+            </my-tr>
+            <my-tr :is-show-head='isShowHead_'>
+                <my-td rowspan_="2">名称2</my-td>
+                <my-td></my-td>
+            </my-tr>
+            <my-tr :is-show-head='isShowHead_'>
+
+                <my-td></my-td>
+            </my-tr>
+        </my-body>
+        <my-body style="color:#606266" v-for="(item,index) in ProductArr"
+                 @expand="expandbody(index)" :class="{on:index%2==0,off:index%2!=0}">
+            <my-tr v-show="true" :index="index">
+                <my-td>{{ProductArr[index].OrderIndex}}</my-td>
+                <my-td></my-td>
+            </my-tr>
+            <my-tr v-show="index == Current">
+                <my-td rowspan_="2">{{ProductArr[index].ProductName}}</my-td>
+                <my-td></my-td>
+            </my-tr>
+            <my-tr v-show="index == Current">
+                <my-td></my-td>
+                <my-td></my-td>
+            </my-tr>
+        </my-body>
+    </my-table>
+    <my-table id="mybody" style="width:300px;">
+
+        <my-body style="color:#909399;font-weight: bold;" @expand="expandhead">
+
+            <template v-slot:col>
+                <colgroup>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                </colgroup>
+            </template>
+            <my-tr :is-show-head=true>
+                <my-td colspan_="2">名称</my-td>
+                <my-td rowspan_="2">销售</my-td>
+                <my-td>利率</my-td>
+                <my-td>利率</my-td>
+                <my-td>销售</my-td>
+                <my-td>销售</my-td>
+                <my-td>利率</my-td>
+                <my-td>利率</my-td>
+                <my-td>利率</my-td>
+            </my-tr>
+            <my-tr :is-show-head='isShowHead_'>
+                <my-td>序2</my-td>
+                <my-td>采购</my-td>
+                <my-td>税率</my-td>
+                <my-td>扩展</my-td>
+                <my-td>采购</my-td>
+                <my-td>采购</my-td>
+                <my-td>税率</my-td>
+                <my-td>扩展</my-td>
+                <my-td>税率</my-td>
+            </my-tr>
+            <my-tr :is-show-head='isShowHead_'>
+                <my-td>序2</my-td>
+                <my-td>采购</my-td>
+                <my-td>采购</my-td>
+                <my-td>税率</my-td>
+                <my-td>扩展</my-td>
+                <my-td>采购</my-td>
+                <my-td>采购</my-td>
+                <my-td>税率</my-td>
+                <my-td>扩展</my-td>
+                <my-td>税率</my-td>
+            </my-tr>
+
+            </my-tr>
+        </my-body>
+        <my-body style="color:#606266" v-for="(item,index) in ProductArr"
+                 @expand="expandbody(index) "
+                 :class="{on:index%2==0,off:index%2!=0}">
+            <template v-slot:col>
+                <colgroup>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                    <col width=10%></col>
+                </colgroup>
+            </template>
+            <my-tr v-show="true" :index="index">
+                <my-td colspan_="2">{{ProductArr[index].OrderIndex}}</my-td>
+                <my-td rowspan_="2">{{ProductArr[index].SalePrice}}</my-td>
+                <my-td>{{ProductArr[index].GrossMargin}}</my-td>
+                <my-td>{{ProductArr[index].GrossMargin}}</my-td>
+                <my-td>{{ProductArr[index].IsSale}}</my-td>
+                <my-td>{{ProductArr[index].SalePrice}}</my-td>
+                <my-td>{{ProductArr[index].GrossMargin}}</my-td>
+                <my-td>{{ProductArr[index].GrossMargin}}</my-td>
+                <my-td>{{ProductArr[index].GrossMargin}}</my-td>
+            </my-tr>
+            <my-tr v-show="index == Current">
+                <my-td>{{ProductArr[index].OrderIndex}}</my-td>
+                <my-td>{{ProductArr[index].PurchasePrice}}</my-td>
+                <my-td>{{ProductArr[index].TaxRate}}</my-td>
+                <my-td>{{ProductArr[index].ExtensionType}}</my-td>
+                <my-td>{{ProductArr[index].IsPurchase}}</my-td>
+                <my-td>{{ProductArr[index].PurchasePrice}}</my-td>
+                <my-td>{{ProductArr[index].TaxRate}}</my-td>
+                <my-td>{{ProductArr[index].ExtensionType}}</my-td>
+                <my-td>{{ProductArr[index].TaxRate}}</my-td>
+            </my-tr>
+            <my-tr v-show="index == Current">
+                <my-td>{{ProductArr[index].OrderIndex}}</my-td>
+                <my-td>{{ProductArr[index].IsPurchase}}</my-td>
+                <my-td>{{ProductArr[index].PurchasePrice}}</my-td>
+                <my-td>{{ProductArr[index].TaxRate}}</my-td>
+                <my-td>{{ProductArr[index].ExtensionType}}</my-td>
+                <my-td>{{ProductArr[index].IsPurchase}}</my-td>
+                <my-td>{{ProductArr[index].PurchasePrice}}</my-td>
+                <my-td>{{ProductArr[index].TaxRate}}</my-td>
+                <my-td>{{ProductArr[index].ExtensionType}}</my-td>
+                <my-td>{{ProductArr[index].TaxRate}}</my-td>
+            </my-tr>
+        </my-body>
+    </my-table>
+</div>
+<script src="/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/vue.min.js" type="text/javascript"></script>
+<script src="/js/mytable.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var store = {
+        isShowBody_: false,
+        isShowHead_: false,
+        Current: null,
+        ProductArr: [{
+            "ProductId": "1827",
+            "ProductName": "jdjdudud",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 14,
+            "SalePrice": 8,
+            "GrossMargin": -75,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 1,
+            "StateStr": "停用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "2",
+            "ProductName": "fasfsadasd",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 16,
+            "SalePrice": 5,
+            "GrossMargin": -220,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "213",
+            "ProductName": "fa",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "232",
+            "ProductName": "测试二",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "两",
+            "PurchasePrice": 1,
+            "SalePrice": 1,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 1,
+            "IsSale": 1,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "24",
+            "ProductName": "6fsdafsda",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "245",
+            "ProductName": "fsafsad",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "24543",
+            "ProductName": "57878",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "246",
+            "ProductName": "344",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "254",
+            "ProductName": "646",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "6263",
+            "ProductName": "fff",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "627",
+            "ProductName": "ueue",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "828",
+            "ProductName": "jdjd",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "877",
+            "ProductName": "ddd",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 1,
+            "StateStr": "停用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "1",
+            "ProductName": "243",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "12",
+            "ProductName": "12",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "1234",
+            "ProductName": "dddd97",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "125",
+            "ProductName": "12",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "234",
+            "ProductName": "6464",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "2456437",
+            "ProductName": "676767",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "2464",
+            "ProductName": "6464646",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }],
+        queryForm: {
+            UnitName: "",
+            State: -1,
+            StateStr: "全部",
+            ProductName: "",
+            TypeId: 0,
+            TypeName: "",
+            PageIndex: 1
+        },
+        haha: false
+    };
+
+    new Vue({
+        el: "#vueRoot",
+        data: store,
+        created: function () {
+            $("#vueRoot").show();
+        },
+        methods: {
+            hahas: function () {
+                if (store.haha == true) {
+                    store.haha = false;
+                } else if (store.haha == false) {
+                    store.haha = true;
+
+                }
+            },
+            /*  query: function () {
+                  var vueThis = this;
+                  $.postByToken("/management/product", JSON.stringify(store.queryForm), function (jobj) {
+                      if (jobj.Success == 1) {
+                          store.ProductArr = jobj.Data.ProductArr;
+                          store.PageCount = jobj.Data.PageCount;
+                          store.RecordCount = jobj.Data.RecordCount;
+                          store.UserActionArr = jobj.Data.UserActionArr;
+                          store.StateArr = jobj.Data.StateArr;
+                      } else if (jobj.Success == -1) {
+                          vueThis.$createDialog({
+                              type: 'alert',
+                              title: '提示',
+                              content: jobj.Msg
+                          }).show();
+                      }
+                  });
+              },*/
+            expandbody: function (index) {
+                if (store.Current == index) {
+                    store.Current = null;
+                } else {
+                    store.Current = index
+
+                }
+            },
+            expandhead: function () {
+                if (store.isShowHead_ == true) {
+
+                    store.isShowHead_ = false;
+                } else if (store.isShowHead_ == false) {
+                    store.isShowHead_ = true;
+
+                }
+            },
+        }
+    });
+</script>
+</body>
+<html>

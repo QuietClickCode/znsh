@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+        user-scalable=no"/>
+    <link rel="stylesheet" href="/js/mytable.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="vueRoot" style="display: block;">
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+    <!--<div class="custom-table&#45;&#45;fixed-wrapper" style="z-index: 100;height:2400px;width:207px;">-->
+    <my-fix>
+
+        <!--<div class="custom-table&#45;&#45;header-wrapper" >-->
+        <template slot="fixhead">
+            <!--<template v-slot:fixhead>-->
+            <table class="table table-bordered">
+                <colgroup>
+                    <col width="100%"></col>
+                </colgroup>
+                <tbody>
+                <tr style="height:24px;">
+                    <td rowspan="2" style="width:50px;overflow:hidden;">
+                        <div style="width: 100px">表头</div>
+                    </td>
+                    <!--  <td>
+                          <div style="width: 100px">我是表头</div>
+                      </td>-->
+                </tr>
+                <tr style="height:24px;" v-show="haha">
+                    <!-- <td>
+                         <div style="width: 100px">我是表头</div>
+                     </td>-->
+                </tr>
+                </tbody>
+            </table>
+        </template>
+        <!--</div>-->
+
+        <!--<div class="custom-table&#45;&#45;body-wrapper is-fixed " style="overflow: hidden">-->
+        <table class="table table-hover table-bordered" style="width:100px;background-color: white;">
+            <tbody v-for="data in tableData">
+            <tr style="height: 80px;">
+                <td rowspan="2">
+                    <div style="width:100px">{{data.id}}</div>
+                </td>
+                <!--  <td>
+                      <div style="width:100px">{{data.id}}</div>
+                  </td>-->
+            </tr>
+            <tr style="height: 80px;" v-show="hehe">
+                <!-- <td>
+                     <div style="width:100px">{{data.id}}</div>
+                 </td>-->
+            </tr>
+            </tbody>
+        </table>
+        <!--</div>-->
+        <!--</div>-->
+    </my-fix>
+    <my-head>
+
+        <!--<div class="header">-->
+        <table>
+            <colgroup>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+            </colgroup>
+            <tbody @click="hahas">
+            <tr>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td rowspan="2">
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td colspan="2">
+                    <div>我是表头1</div>
+                </td>
+                <!-- <td>
+                     <div>我是表头1</div>
+                 </td>-->
+            </tr>
+            <tr v-show="haha">
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <!-- <td>
+                     <div>我是表头1</div>
+                 </td>-->
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+                <td>
+                    <div>我是表头1</div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </my-head>
+    <!--</div>-->
+    <!--<div class="body">-->
+    <my-body>
+        <table>
+            <colgroup>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+                <col width="10%"></col>
+            </colgroup>
+            <tbody v-for="data in tableData" @click="hehes">
+            <tr>
+                <td>
+                    <div>{{data.id}}</div>
+                </td>
+                <td>
+                    <div>{{data.name}}</div>
+                </td>
+                <td rowspan="2">
+                    <div>{{data.amount1}}</div>
+                </td>
+                <td>
+                    <div>{{data.amount2}}</div>
+                </td>
+                <td>
+                    <div>{{data.amount3}}</div>
+                </td>
+                <td>
+                    <div>{{data.id}}</div>
+                </td>
+                <td>
+                    <div>{{data.name}}</div>
+                </td>
+                <td>
+                    <div>{{data.amount1}}</div>
+                </td>
+                <td colspan="2">
+                    <div>{{data.amount2}}</div>
+                </td>
+                <!--<td>
+                    <div>{{data.amount3}}</div>
+                </td>-->
+            </tr>
+            <tr v-show="hehe">
+                <td>
+                    <div>{{data.id}}</div>
+                </td>
+                <td>
+                    <div>{{data.name}}</div>
+                </td>
+                <!-- <td>
+                     <div>{{data.amount1}}</div>
+                 </td>-->
+                <td>
+                    <div>{{data.amount2}}</div>
+                </td>
+                <td>
+                    <div>{{data.amount3}}</div>
+                </td>
+                <td>
+                    <div>{{data.id}}</div>
+                </td>
+                <td>
+                    <div>{{data.name}}</div>
+                </td>
+                <td>
+                    <div>{{data.amount1}}</div>
+                </td>
+                <td>
+                    <div>{{data.amount2}}</div>
+                </td>
+                <td>
+                    <div>{{data.amount3}}</div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </my-body>
+    <!--</div>-->
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+    <h1>jfkajkl</h1>
+</div>
+<script src="/js/jquery-1.9.1.min.js"></script>
+<script src="/js/xdcommon.js"></script>
+<script src="/js/vue.min.js" type="text/javascript"></script>
+<script src="/js/mytable.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var store = {
+        hehe: false,
+        haha: false,
+        isShowBody_: false,
+        isShowHead_: false,
+        Current: null,
+        queryForm: {
+            UnitName: "",
+            State: -1,
+            StateStr: "全部",
+            ProductName: "",
+            TypeId: 0,
+            TypeName: "",
+            PageIndex: 1
+        },
+        tableData: [{
+            id: '12987122',
+            name: '王小虎',
+            amount1: '234',
+            amount2: '3.2',
+            amount3: 10,
+        }, {
+            id: '12987123',
+            name: '王小虎',
+            amount1: '165',
+            amount2: '4.43',
+            amount3: 12
+        }, {
+            id: '12987124',
+            name: '王小虎',
+            amount1: '324',
+            amount2: '1.9',
+            amount3: 9
+        }, {
+            id: '12987125',
+            name: '王小虎',
+            amount1: '621',
+            amount2: '2.2',
+            amount3: 17,
+
+        }, {
+            id: '12987126',
+            name: '王小虎',
+            amount1: '539',
+            amount2: '4.1',
+            amount3: 15
+        }, {
+            id: '12987122',
+            name: '王小虎',
+            amount1: '234',
+            amount2: '3.2',
+            amount3: 10
+        }, {
+            id: '12987123',
+            name: '王小虎',
+            amount1: '165',
+            amount2: '4.43',
+            amount3: 12
+        }, {
+            id: '12987124',
+            name: '王小虎',
+            amount1: '324',
+            amount2: '1.9',
+            amount3: 9
+        }, {
+            id: '12987125',
+            name: '王小虎',
+            amount1: '621',
+            amount2: '2.2',
+            amount3: 17
+        }, {
+            id: '12987126',
+            name: '王小虎',
+            amount1: '539',
+            amount2: '4.1',
+            amount3: 15
+        }, {
+            id: '12987122',
+            name: '王小虎',
+            amount1: '234',
+            amount2: '3.2',
+            amount3: 10
+        }, {
+            id: '12987123',
+            name: '王小虎',
+            amount1: '165',
+            amount2: '4.43',
+            amount3: 12
+        }, {
+            id: '12987124',
+            name: '王小虎',
+            amount1: '324',
+            amount2: '1.9',
+            amount3: 9
+        }, {
+            id: '12987125',
+            name: '王小虎',
+            amount1: '621',
+            amount2: '2.2',
+            amount3: 17
+        }, {
+            id: '12987126',
+            name: '王小虎',
+            amount1: '539',
+            amount2: '4.1',
+            amount3: 15
+        }],
+        ProductArr: [{
+            "ProductId": "1827",
+            "ProductName": "jdjdudud",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 14,
+            "SalePrice": 8,
+            "GrossMargin": -75,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 1,
+            "StateStr": "停用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "2",
+            "ProductName": "fasfsadasd",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 16,
+            "SalePrice": 5,
+            "GrossMargin": -220,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "213",
+            "ProductName": "fa",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "232",
+            "ProductName": "测试二",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "两",
+            "PurchasePrice": 1,
+            "SalePrice": 1,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 1,
+            "IsSale": 1,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "24",
+            "ProductName": "6fsdafsda",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "245",
+            "ProductName": "fsafsad",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "24543",
+            "ProductName": "57878",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "246",
+            "ProductName": "344",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "254",
+            "ProductName": "646",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "6263",
+            "ProductName": "fff",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "627",
+            "ProductName": "ueue",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "828",
+            "ProductName": "jdjd",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "877",
+            "ProductName": "ddd",
+            "TypeId": 1,
+            "TypeName": "fas",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 1,
+            "StateStr": "停用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "1",
+            "ProductName": "243",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "12",
+            "ProductName": "12",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "1234",
+            "ProductName": "dddd97",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 2,
+            "StateStr": "启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "125",
+            "ProductName": "12",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "234",
+            "ProductName": "6464",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "2456437",
+            "ProductName": "676767",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }, {
+            "ProductId": "2464",
+            "ProductName": "6464646",
+            "TypeId": 2,
+            "TypeName": "fasfa",
+            "MeterType": 1,
+            "Unit": "千克",
+            "PurchasePrice": 0,
+            "SalePrice": 0,
+            "GrossMargin": 0,
+            "TaxRate": 0,
+            "ExtensionType": 0,
+            "IsChangePrice": 0,
+            "IsPurchase": 0,
+            "IsSale": 0,
+            "IsMaterial": 0,
+            "IsAuxiliary": 0,
+            "State": 0,
+            "StateStr": "未启用",
+            "OrderIndex": 0
+        }],
+
+        queryForm: {
+            UnitName: "",
+            State: -1,
+            StateStr: "全部",
+            ProductName: "",
+            TypeId: 0,
+            TypeName: "",
+            PageIndex: 1
+        },
+    };
+
+    new Vue({
+        el: "#vueRoot",
+        data: store,
+        created: function () {
+            // this.query();
+            $("#vueRoot").show();
+        },
+        methods: {
+            hehes: function () {
+                if (store.hehe == true) {
+
+                    store.hehe = false;
+                } else {
+                    store.hehe = true;
+
+                }
+            },
+            hahas: function () {
+                if (store.haha == true) {
+
+                    store.haha = false;
+                } else {
+                    store.haha = true;
+
+                }
+
+            },
+            query: function () {
+                var vueThis = this;
+                $.postByToken("/management/product", JSON.stringify(store.queryForm), function (jobj) {
+                    if (jobj.Success == 1) {
+                        store.ProductArr = jobj.Data.ProductArr;
+                        store.PageCount = jobj.Data.PageCount;
+                        store.RecordCount = jobj.Data.RecordCount;
+                        store.UserActionArr = jobj.Data.UserActionArr;
+                        store.StateArr = jobj.Data.StateArr;
+                    } else if (jobj.Success == -1) {
+                        vueThis.$createDialog({
+                            type: 'alert',
+                            title: '提示',
+                            content: jobj.Msg
+                        }).show();
+                    }
+                });
+            },
+            expandbody: function (index) {
+                if (store.Current == index) {
+                    store.Current = null;
+                } else {
+                    store.Current = index
+
+                }
+            },
+            expandhead: function () {
+                if (store.isShowHead_ == true) {
+                    $("#myTab2").css("height", "45")
+                    $("#myTab1").css("height", "45")
+
+                    store.isShowHead_ = false;
+                } else if (store.isShowHead_ == false) {
+                    $("#myTab2").css("height", "150px")
+                    $("#myTab1").css("height", "150px")
+                    store.isShowHead_ = true;
+
+                }
+
+
+            },
+        }
+    });
+
+
+    $(function () {
+        $('.body').on('scroll', function () {
+            let left = $(this).scrollLeft();
+            $('.header').scrollLeft(left);
+        });
+        $('.header').on('scroll', function () {
+            let left = $(this).scrollLeft();
+            $('.body').scrollLeft(left);
+        });
+        var tab_top = $('.header').offset().top;
+        $(window).scroll(function () {
+            var scroH = $(this).scrollTop();
+            if (scroH > tab_top) {
+                $(".header").css("position", "fixed");
+                $(".custom-table--header-wrapper").css("position", "fixed");
+                $(".header").css("top", "0px");
+                $(".custom-table--header-wrapper").css("top", "0px");
+                $(".header").css("background-color", "white");
+                $(".custom-table--header-wrapper").css("background-color", "white");
+            } else {
+                $(".header").css("position", "relative");
+                $(".custom-table--header-wrapper").css("position", "relative");
+
+            }
+        });
+    });
+
+</script>
+</body>
+<html>
