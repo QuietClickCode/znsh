@@ -20,4 +20,5 @@ public class VueTestController {
     public String vuephone() {
         return "vuephonetest";
     }
+
 }
