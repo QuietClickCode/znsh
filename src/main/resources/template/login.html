@@ -95,7 +95,12 @@
                             offset: '30%',
                             time: 800
                         }, function () {
-                            window.location.href = "/index";
+                            if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                                window.location.href = "/mindex";
+                            }else{
+                                window.location.href="/index";
+                            }
+
                         });
                     }else{
                         layer.msg(data.msg, {

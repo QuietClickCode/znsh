@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/cube.min.css">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="vueRoot" style="display: none;">
+    <h1>手机端bootstrap表格示例</h1>
+    <div class="container">
+        <table class="table table-hover table-condensed table-bordered table-striped">
+
+            <tr class="danger">
+                <th>表头</th>
+                <th>表头</th>
+                <th>表头</th>
+            </tr>
+            <tr>
+                <td class="info">123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+        </table>
+    </div>
+
+
+    绝大多数的弹层类组件可以通过组件调用和 API 调用，来看示例（Toast 为例）：
+
+    <br>
+    组件调用：
+    <cube-button @click="showToast">show toast</cube-button>
+    <cube-toast ref="toast" :txt="toastTxt"></cube-toast>
+    <br>
+    api调用
+    <cube-button @click="showToastApi">show toast (api)</cube-button>
+    <br>
+    两种方式都可以，但是我们推荐后者，通过 $createXxYy API 来调用；通过 API 调用的话，这个弹框是附加到 body 元素下的，这样的好处是可以不受外层样式的影响，因为组件调用的话，很容易受到外层 transform, overflow 等样式的影响。
+
+    注意这个 API 的名字的组合就是：$create + ${组件名字}，例如 ActionSheet 组件的话，API 名字就是 $createActionSheet。
+
+
+    Button
+    按钮，提供了各种类型、样子、状态以及图标。
+
+    按钮类型
+
+    默认类型为 button，还可设置为 submit 用于表单中
+
+    <cube-button>Button</cube-button>
+    <cube-button type="submit">Submit Button</cube-button>
+
+    按钮状态
+
+    默认正常，可设置激活、禁用状态
+
+    <cube-button :active="true">Active Button</cube-button>
+    <cube-button :disabled="true">Disabled Button</cube-button>
+    图标
+
+    可设置 icon 的 class
+
+    <cube-button icon="cubeic-like">Button With Icon</cube-button>
+
+    样子
+
+    可以通过设置 light、inline、outline、primary 属性来改变按钮样子
+
+    <cube-button :light="true">Light Button</cube-button>
+    <cube-button :inline="true">Inline Button</cube-button>
+    <cube-button :outline="true">Outline Button</cube-button>
+    <cube-button :primary="true">Primary Button</cube-button>
+
+    Loading
+    加载，提供了可自定义大小的加载动画。
+
+    图标大小
+
+    默认大小为24px，可通过size属性配置
+
+
+    <cube-loading></cube-loading>
+    <cube-loading :size="28"></cube-loading>
+    <cube-loading :size="40"></cube-loading>
+
+    基础使用
+
+    通过在 Tip 组件上添加 ref 属性，获得对于组件的引用，然后调用 Tip 组件向外暴露出来的 show、hide 方法来控制组件的显示或隐藏。
+
+
+    Tip
+    提示，用于弹出提示气泡框。
+    <br>
+
+    <cube-button
+            :inline="true"
+            :outline="true"
+            :primary="true"
+            @click="showTip">Show tip</cube-button>
+    <cube-tip ref="tip" direction="top">Tip</cube-tip>
+    小三角和气泡框的位置
+
+    通过 direction 属性配置小三角的方向，一般情况下需要通过 style 改变气泡框的位置；一般来说，小三角的方向是与气泡框的位置相反的。
+
+    <p class="tip-eg">
+        <span>cube-ui</span>
+        <cube-tip
+                ref="tip2"
+                :direction="direction"
+                :style="tipStyle"
+                @close="close"
+                @click="clickHandler">
+            <div>Awesome!</div>
+        </cube-tip>
+    </p>
+    <cube-button @click="showTip('bottom')">top</cube-button>
+    <cube-button @click="showTip('top')">bottom</cube-button>
+    <cube-button @click="showTip('right')">left</cube-button>
+    <cube-button @click="showTip('left')">right</cube-button>
+
+    Toolbar
+
+    工具栏，可以组合多个按钮，复选框操作为一个工具栏。
+    基础使用
+
+    将每个操作的类型和文本传入 actions 属性。
+
+    <!--<cube-toolbar :actions="actions" @click="clickHandler"></cube-toolbar>-->
+
+    <!--<cube-toolbar
+            :actions="actions"
+            :more-actions="moreActions"
+            @click="clickHandler"></cube-toolbar>-->
+
+    TabBar
+    选项卡。
+
+    CubeTabBar
+    支持默认的点击高亮效果，又支持下划线跟随的效果，并且支持自定义的插槽，实现icon与label搭配的类似于app底部选项卡的样式。
+
+    默认样式
+
+    传入如下 tabs 的数据结构便能初始化 cube-tab-bar，必须使用 v-model 指令来选中对应的 tab， v-model 的参数的值必须与某一项 tab 的 label 属性对应（1.12.5 版本后是和 value 属性对应），icon 属性是用做于 class 选择器，一般是用字体图标样式，cube-tab-bar 在不同的时机派发 click 与 change 事件，参数则是每次选中的 tab 对应的 label 值（1.12.5 版本后是 value 值）。
+    <cube-tab-bar
+            v-model="selectedLabelDefault"
+            :data="tabs"
+            @click="clickHandler"
+            @change="changeHandler">
+    </cube-tab-bar>
+
+    自定义插槽
+
+    实际上我们更常见的需求是图标搭配文字效果，因此 cube-tab-bar 组件也支持了插槽的使用方式， 注意必须搭配 cube-tab 组件作为第一层级的子组件，来包裹你自定义插槽。
+    <cube-tab-bar
+            v-model="selectedLabelSlots"
+            show-slider
+            inline
+            @click="clickHandler">
+        <cube-tab v-for="(item, index) in tabs" :label="item.label" :key="item.label">
+            <!-- name为icon的插槽 -->
+            <i slot="icon" :class="item.icon"></i>
+            <!-- 默认插槽 -->
+            {{item.label}}
+        </cube-tab>
+    </cube-tab-bar>
+    往往我们的需求是随着 tab 的切换显示不同的容器，这个时候需要搭配 cube-tab-panels 组件。cube-tab-panels 必须嵌套 cube-tab-panel，传入 cube-tab 与 cube-tab-panel 的label值必须一致（1.12.5 版本后和 value 值一致），因为需要建立一个 tab 对应一个 panel 的关系。他们通过相同的 v-model 联动。查看效果可点击右边的 tab-basic 示例。
+    <cube-tab-bar v-model="selectedLabel" show-slider>
+        <cube-tab v-for="(item, index) in tabs" :icon="item.icon" :label="item.label" :key="item.label">
+        </cube-tab>
+    </cube-tab-bar>
+    <cube-tab-panels v-model="selectedLabel">
+        <cube-tab-panel v-for="(item, index) in tabs" :label="item.label" :key="item.label">
+            <ul>
+                <li class="tab-panel-li" v-for="(hero, index) in item.heroes">
+                    {{hero}}
+                </li>
+            </ul>
+        </cube-tab-panel>
+    </cube-tab-panels>
+
+</div>
+<script src="/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/js/vue.min.js" type="text/javascript"></script>
+<script src="/js/cube.min.js" type="text/javascript"></script>
+</body>
+
+<script>
+    var store = {
+        selectedLabel: '天辉',
+        tabs: [{
+            label: '天辉',
+            icon: 'cubeic-like',
+            heroes: ['敌法师', '卓尔游侠', '主宰', '米拉娜', '变体精灵', '幻影长矛手', '复仇之魂', '力丸', '矮人狙击手', '圣堂刺客', '露娜', '赏金猎人', '熊战士']
+        }, {
+            label: '夜魇',
+            icon: 'cubeic-star',
+            heroes: ['血魔', '影魔', '剃刀', '剧毒术士', '虚空假面', '幻影刺客', '冥界亚龙', '克林克兹', '育母蜘蛛', '编织者', '幽鬼', '司夜刺客', '米波']
+        }],
+        selectedLabelSlots: 'Like',
+      /*  tabs: [{
+            label: 'Home',
+            icon: 'cubeic-home'
+        }, {
+            label: 'Like',
+            icon: 'cubeic-like'
+        }, {
+            label: 'Vip',
+            icon: 'cubeic-vip'
+        }, {
+            label: 'Me',
+            icon: 'cubeic-person'
+        }],*/
+        selectedLabelDefault: 'Vip',
+       /* tabs: [{
+            label: 'Home',
+            icon: 'cubeic-home'
+        }, {
+            label: 'Like',
+            icon: 'cubeic-like'
+        }, {
+            label: 'Vip',
+            icon: 'cubeic-vip'
+        }, {
+            label: 'Me',
+            icon: 'cubeic-person'
+        }],*/
+        money: 10,
+        actions: [
+            {
+                text: '完成订单',
+                action: 'showText'
+            },
+            {
+                text: '打车来接',
+                checked: false,
+                type: 'checkbox'
+            },
+            {
+                text: '一口价<span class="orange">10元</span>',
+                action: 'moreMoney'
+            }
+        ],
+        moreActions: [
+            {
+                text: '操作a',
+                action: 'showText'
+            },
+            {
+                text: '操作b',
+                action: 'showText'
+            },
+            {
+                text: '操作c',
+                icon: 'cubeic-right',
+                action: 'showText'
+            }
+        ],
+        toastTxt: 'toast content',
+        direction: '',
+        tipStyle: '',
+        money: 10,
+        actions: [
+            {
+                text: '完成订单',
+                action: 'showText'
+            },
+            {
+                text: '打车来接',
+                checked: false,
+                type: 'checkbox'
+            },
+            {
+                text: '一口价<span class="orange">10元</span>',
+                action: 'moreMoney'
+            }
+        ]
+
+    };
+    var vue = new Vue({
+        el: "#vueRoot",
+        data: store,
+        created: function () {
+
+            $("#vueRoot").show();
+        },
+        methods: {
+            clickHandler (label) {
+                // if you clicked home tab, then print 'Home'
+                console.log(label)
+            },
+           /* clickHandler (label) {
+                // if you clicked home tab, then print 'Home'
+                console.log(label)
+            },*/
+            changeHandler (label) {
+                // if you clicked different tab, this methods can be emitted
+            },
+
+            showText(item) {
+                this.$createToast({
+                    type: 'correct',
+                    txt: 'clicked ' + item.text,
+                    time: 1000
+                }).show()
+            },
+            moreMoney(item) {
+                this.money += 10
+                item.text = '一口价<span class="orange">' + this.money + '元</span>'
+            },
+            clickHandler(item) {
+                if (item.action) {
+                    this[item.action](item)
+                }
+            },
+          /*  showText(item) {
+                this.$createToast({
+                    type: 'correct',
+                    txt: 'clicked ' + item.text,
+                    time: 1000
+                }).show()
+            },
+            moreMoney(item) {
+                this.money += 10
+                item.text = '一口价<span class="orange">' + this.money + '元</span>'
+            },
+            clickHandler(item) {
+                if (item.action) {
+                    this[item.action](item)
+                }
+            },*/
+
+            showTip(direction) {
+                this.direction = direction
+                this.$refs.tip2.show()
+
+                switch (direction) {
+                    case 'top':
+                        this.tipStyle = 'left: 100px; top: 30px;'
+                        break
+                    case 'bottom':
+                        this.tipStyle = 'left: 100px; top: -50px;'
+                        break
+                    case 'left':
+                        this.tipStyle = 'left: 200px; top: -10px;'
+                        break
+                    case 'right':
+                        this.tipStyle = 'left: 2px; top: -10px;'
+                        break
+                }
+            },
+            close() {
+                console.log('click close button')
+            },
+            /*clickHandler() {
+                console.log('click tip area')
+            },*/
+            showTip() {
+                var vueThis = this;
+                vueThis.$refs.tip.show();
+            },
+            showToast() {
+                var vueThis = this;
+                vueThis.$refs.toast.show()
+            },
+            showToastApi() {
+                var vueThis = this;
+                vueThis.$createToast({
+                    txt:vueThis.toastTxt,
+                }).show();
+            }
+        }
+    })
+
+
+</script>
+</html>
